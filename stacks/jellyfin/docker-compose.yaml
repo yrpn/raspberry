@@ -1,0 +1,14 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    network_mode: 'host'
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - /home/hdd/Downloads:/media
+    restart: 'unless-stopped'
+    environment:
+      - JELLYFIN_PublishedServerUrl=http://192.168.1.100
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

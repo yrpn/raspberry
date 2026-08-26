@@ -1,0 +1,16 @@
+serial:
+  port: /dev/ttyACM0
+  adapter: ember
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://localhost:1883
+  client_id: zigbee
+  discovery: true
+  discovery_prefix: homeassistant
+frontend:
+  enabled: true
+  port: 8081
+homeassistant:
+  enabled: true
+advanced:
+  channel: 25

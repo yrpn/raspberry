@@ -1,0 +1,92 @@
+mqtt:
+  enabled: false
+
+birdseye:
+  enabled: false
+
+record:
+  enabled: true
+  retain:
+    days: 7
+    mode: motion
+
+detect:
+  enabled: false
+  width: 640
+  height: 360
+  fps: 5
+
+live:
+  height: 360
+
+motion:
+  mask: 0,0.055,0.24,0.055,0.24,0.095,0,0.095
+
+ffmpeg:
+  hwaccel_args: preset-rpi-64-h264
+
+go2rtc:
+  streams:
+    elokert: rtsp://****:****@192.168.1.11/streaming/channels/101
+    elokert_sub: rtsp://****:****@192.168.1.11/streaming/channels/102
+    bejarat: rtsp://****:****@192.168.1.12/streaming/channels/101
+    bejarat_sub: rtsp://****:****@192.168.1.12/streaming/channels/102
+    beallo: rtsp://****:****@192.168.1.13/streaming/channels/101
+    beallo_sub: rtsp://****:****@192.168.1.13/streaming/channels/102
+    hatsokert: rtsp://****:****@192.168.1.14/streaming/channels/101
+    hatsokert_sub: rtsp://****:****@192.168.1.14/streaming/channels/102
+
+cameras:
+  elokert:
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/elokert
+          input_args: preset-rtsp-restream
+          roles:
+            - record
+        - path: rtsp://127.0.0.1:8554/elokert_sub
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+    ui:
+      order: 1
+  bejarat:
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/bejarat
+          input_args: preset-rtsp-restream
+          roles:
+            - record
+        - path: rtsp://127.0.0.1:8554/bejarat_sub
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+    ui:
+      order: 2
+  beallo:
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/beallo
+          input_args: preset-rtsp-restream
+          roles:
+            - record
+        - path: rtsp://127.0.0.1:8554/beallo_sub
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+    ui:
+      order: 3
+  hatsokert:
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/hatsokert
+          input_args: preset-rtsp-restream
+          roles:
+            - record
+        - path: rtsp://127.0.0.1:8554/hatsokert_sub
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+    ui:
+      order: 4
+version: 0.16-0

@@ -1,0 +1,23 @@
+services:
+  qbittorrent-nox:
+    container_name: qbittorrent-nox
+    restart: unless-stopped
+    environment:
+      - QBT_EULA=accept
+      - QBT_VERSION=latest
+      - QBT_WEBUI_PORT=8080
+      - QBT_TORRENTING_PORT=51413
+      - TZ=Europe/Budapest
+    image: qbittorrentofficial/qbittorrent-nox:latest
+    ports:
+      - 51413:51413/tcp
+      - 51413:51413/udp
+      - 8080:8080/tcp
+    read_only: true
+    stop_grace_period: 30m
+    tmpfs:
+      - /tmp
+    tty: true
+    volumes:
+      - ./config:/config
+      - /mnt/hdd/Downloads:/downloads
